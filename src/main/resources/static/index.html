@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPRMS - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container glass-effect">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>HPRMS</h2>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-target="dashboard-view">Dashboard</button>
+                <button class="nav-btn" data-target="register-view">Register Patient</button>
+                <button class="nav-btn" data-target="appointments-view">Appointments</button>
+                <button class="nav-btn" data-target="labtests-view">Lab Tests</button>
+                <button class="nav-btn" data-target="billing-view">Billing</button>
+                <button class="nav-btn" data-target="reports-view">Reports</button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view active">
+                <header>
+                    <h1>Welcome to HPRMS</h1>
+                    <p>Hospital Patient Record Management System</p>
+                </header>
+
+                <div class="stats-cards">
+                    <div class="card stat-card glass-effect-light">
+                        <h3>Total Patients</h3>
+                        <p id="total-patients-count" class="stat-number">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="card list-card glass-effect-light">
+                    <div class="card-header">
+                        <h2>All Patients</h2>
+                        <button id="refresh-patients-btn" class="btn btn-icon">&#x21bb;</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="table hover">
+                            <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Name</th>
+                                    <th>Date of Birth</th>
+                                    <th>Contact</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patients-table-body">
+                                <!-- Data injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Register Patient View -->
+            <section id="register-view" class="view">
+                <header>
+                    <h1>Register Patient</h1>
+                    <p>Add a new patient to the system</p>
+                </header>
+                <div class="card form-card glass-effect-light">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="reg-id">Patient ID</label>
+                            <input type="text" id="reg-id" required placeholder="e.g. P001">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-name">Full Name</label>
+                            <input type="text" id="reg-name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-dob">Date of Birth</label>
+                            <input type="date" id="reg-dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-contact">Contact Number</label>
+                            <input type="text" id="reg-contact" required placeholder="+1 234 567 890">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-gender">Gender</label>
+                            <select id="reg-gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register Patient</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Appointments View -->
+            <section id="appointments-view" class="view">
+                <header>
+                    <h1>Appointments</h1>
+                    <p>Schedule a new appointment</p>
+                </header>
+                <div class="layout-grid">
+                    <div class="card form-card glass-effect-light">
+                        <form id="appointment-form">
+                            <div class="form-group">
+                                <label for="apt-patient-id">Patient ID</label>
+                                <input type="text" id="apt-patient-id" required placeholder="e.g. P001">
+                            </div>
+                            <div class="form-group">
+                                <label for="apt-doctor-id">Doctor ID</label>
+                                <input type="text" id="apt-doctor-id" required placeholder="e.g. D101">
+                            </div>
+                            <div class="form-group">
+                                <label for="apt-date">Date</label>
+                                <input type="date" id="apt-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apt-time">Time</label>
+                                <input type="time" id="apt-time" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab Tests View -->
+            <section id="labtests-view" class="view">
+                <header>
+                    <h1>Laboratory & Tests</h1>
+                    <p>Upload new test results</p>
+                </header>
+                <div class="card form-card glass-effect-light">
+                    <form id="labtest-form">
+                        <div class="form-group">
+                            <label for="lab-patient-id">Patient ID</label>
+                            <input type="text" id="lab-patient-id" required placeholder="e.g. P001">
+                        </div>
+                        <div class="form-group">
+                            <label for="lab-doctor-id">Doctor ID</label>
+                            <input type="text" id="lab-doctor-id" required placeholder="e.g. D101">
+                        </div>
+                        <div class="form-group">
+                            <label for="lab-test-name">Test Name</label>
+                            <input type="text" id="lab-test-name" required placeholder="e.g. Complete Blood Count">
+                        </div>
+                        <div class="form-group">
+                            <label for="lab-result">Result / Notes</label>
+                            <textarea id="lab-result" required rows="3"
+                                placeholder="Normal ranges observed..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload Results</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Billing View -->
+            <section id="billing-view" class="view">
+                <header>
+                    <h1>Billing & Payments</h1>
+                    <p>Generate invoices and track payments</p>
+                </header>
+
+                <div class="card form-card glass-effect-light" style="margin-bottom: 2rem;">
+                    <h2>Generate New Bill</h2>
+                    <br>
+                    <form id="billing-form">
+                        <div class="form-group">
+                            <label for="bill-patient-id">Patient ID</label>
+                            <input type="text" id="bill-patient-id" required placeholder="e.g. P001">
+                        </div>
+                        <div class="form-group">
+                            <label for="bill-amount">Amount ($)</label>
+                            <input type="number" step="0.01" id="bill-amount" required placeholder="150.00">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Invoice</button>
+                    </form>
+                </div>
+
+                <div class="card list-card glass-effect-light">
+                    <div class="card-header">
+                        <h2>All Bills</h2>
+                        <button id="refresh-bills-btn" class="btn btn-icon">&#x21bb;</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="table hover">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Patient ID</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bills-table-body">
+                                <!-- Data injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports View -->
+            <section id="reports-view" class="view">
+                <header>
+                    <h1>Automated Reports</h1>
+                    <p>Hospital Performance Statistics</p>
+                </header>
+                <div class="card-header" style="margin-bottom:1rem;">
+                    <button id="refresh-reports-btn" class="btn btn-primary">Refresh Data</button>
+                </div>
+
+                <div class="stats-cards">
+                    <div class="card stat-card glass-effect-light">
+                        <h3>Total Patients Registered</h3>
+                        <p id="rep-patients" class="stat-number">0</p>
+                    </div>
+                    <div class="card stat-card glass-effect-light">
+                        <h3>Total Treatments (All Time)</h3>
+                        <p id="rep-treatments" class="stat-number">0</p>
+                    </div>
+                    <div class="card stat-card glass-effect-light">
+                        <h3>Treatments Today</h3>
+                        <p id="rep-today" class="stat-number">0</p>
+                    </div>
+                    <div class="card stat-card glass-effect-light">
+                        <h3>Total Revenue Collected</h3>
+                        <p id="rep-revenue" class="stat-number text-success">$0.00</p>
+                    </div>
+                    <div class="card stat-card glass-effect-light border-danger">
+                        <h3>Pending Revenue (Unpaid)</h3>
+                        <p id="rep-pending" class="stat-number text-danger">$0.00</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal for Patient History -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content glass-effect">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-patient-name">Patient History</h2>
+            <div class="modal-body">
+
+                <!-- Quick jump tabs inside modal -->
+                <div class="modal-tabs"
+                    style="margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">
+                    <button class="btn btn-small modal-tab active" data-target="history-records-container">Medical
+                        Records</button>
+                    <button class="btn btn-small modal-tab" data-target="history-labs-container">Lab Tests</button>
+                </div>
+
+                <div id="history-records-container" class="history-tab-content active">
+                    <!-- Data injected by JS -->
+                </div>
+
+                <div id="history-labs-container" class="history-tab-content" style="display:none;">
+                    <!-- Data injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
